@@ -1,7 +1,8 @@
 ﻿using BepInEx.Configuration;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace PrivateRyan.ActuallyFIR.Helpers
+namespace PrivateRyan.ActuallyFoundInRaid.Helpers
 {
     internal class Settings
     {
@@ -33,10 +34,9 @@ namespace PrivateRyan.ActuallyFIR.Helpers
         private static void RecalcOrder()
         {
             // Set the Order field for all settings, to avoid unnecessary changes when adding new settings
-            int settingOrder = ConfigEntries.Count;
-            foreach (var entry in ConfigEntries)
+            var settingOrder = ConfigEntries.Count;
+            foreach (var attributes in ConfigEntries.Select(entry => entry.Description.Tags[0] as ConfigurationManagerAttributes))
             {
-                ConfigurationManagerAttributes attributes = entry.Description.Tags[0] as ConfigurationManagerAttributes;
                 if (attributes != null)
                 {
                     attributes.Order = settingOrder;

@@ -1,6 +1,6 @@
 ﻿using EFT.InventoryLogic;
 
-namespace PrivateRyan.ActuallyFIR.Helpers
+namespace PrivateRyan.ActuallyFoundInRaid.Helpers
 {
     internal class Utils
     {
@@ -21,12 +21,10 @@ namespace PrivateRyan.ActuallyFIR.Helpers
         
         public static void ProcessSlot(Slot slot)
         {
-            Item item = slot.ContainedItem;
-            if (item != null)
-            {
-                item.SpawnedInSession = true;
-                item.GetAllItems().ExecuteForEach(x => x.SpawnedInSession = true);
-            }
+            var item = slot.ContainedItem;
+            if (item == null) return;
+            item.SpawnedInSession = true;
+            item.GetAllItems().ExecuteForEach(x => x.SpawnedInSession = true);
         }
     }
 }

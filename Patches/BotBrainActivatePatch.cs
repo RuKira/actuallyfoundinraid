@@ -3,10 +3,10 @@ using SPT.Reflection.Patching;
 using HarmonyLib;
 using System.Reflection;
 using EFT;
-using PrivateRyan.ActuallyFIR.Helpers;
+using PrivateRyan.ActuallyFoundInRaid.Helpers;
 using SPT.Custom.CustomAI;
 
-namespace PrivateRyan.ActuallyFIR.Patches
+namespace PrivateRyan.ActuallyFoundInRaid.Patches
 {
     public class BotBrainActivatePatch : ModulePatch
     {
@@ -29,7 +29,7 @@ namespace PrivateRyan.ActuallyFIR.Patches
                 var isSptPmc = AiHelpers.BotIsSptPmc(__state, ___botOwner_0);
                 if (isSptPmc)
                 {
-                    Profile botProfile = ___botOwner_0.Profile;
+                    var botProfile = ___botOwner_0.Profile;
                     botProfile.SetSpawnedInSession(true);
                     
                     foreach (var slotType in Utils.SlotsToProcess)

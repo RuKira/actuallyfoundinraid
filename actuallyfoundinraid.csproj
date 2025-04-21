@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>PrivateRyan.ActuallyFoundInRaid</RootNamespace>
     <AssemblyName>ActuallyFoundInRaid</AssemblyName>
-    <Copyright>Private Ryan</Copyright>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -58,4 +57,7 @@
     </Reference>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\..\BepInEx\plugins\$(TargetName).dll&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug&quot; (&#xD;&#xA;   copy /Y &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(SolutionDir)..\..\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;) else (&#xD;&#xA;    del /Q &quot;$(SolutionDir)..\..\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;    powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;$(ProjectDir)PackageMods.ps1&quot; -ConfigurationName &quot;$(ConfigurationName)&quot; -TargetPath &quot;$(TargetPath)&quot; -TargetName &quot;$(TargetName)&quot; -SolutionDir $(SolutionDir)&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;" />
+  </Target>
 </Project>
