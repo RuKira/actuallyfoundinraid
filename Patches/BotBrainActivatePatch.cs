@@ -3,10 +3,10 @@ using SPT.Reflection.Patching;
 using HarmonyLib;
 using System.Reflection;
 using EFT;
-using PrivateRyan.ActuallyFoundInRaid.Helpers;
+using RuKira.ActuallyFoundInRaid.Helpers;
 using SPT.Custom.CustomAI;
 
-namespace PrivateRyan.ActuallyFoundInRaid.Patches
+namespace RuKira.ActuallyFoundInRaid.Patches
 {
     public class BotBrainActivatePatch : ModulePatch
     {
@@ -26,7 +26,7 @@ namespace PrivateRyan.ActuallyFoundInRaid.Patches
             
             try
             {
-                var isSptPmc = AiHelpers.BotIsSptPmc(__state, ___botOwner_0);
+                var isSptPmc = AIExtensions.IsPMC(___botOwner_0);
                 if (isSptPmc)
                 {
                     var botProfile = ___botOwner_0.Profile;

@@ -1,63 +1,120 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFramework>net472</TargetFramework>
-    <RootNamespace>PrivateRyan.ActuallyFoundInRaid</RootNamespace>
-    <AssemblyName>ActuallyFoundInRaid</AssemblyName>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <Optimize>False</Optimize>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\dependencies\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="spt-common">
-      <HintPath>..\dependencies\spt-common.dll</HintPath>
-    </Reference>
-    <Reference Include="spt-custom">
-      <HintPath>..\dependencies\spt-custom.dll</HintPath>
-    </Reference>
-    <Reference Include="spt-reflection">
-      <HintPath>..\dependencies\spt-reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\dependencies\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx">
-      <HintPath>..\dependencies\BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="Comfort">
-      <HintPath>..\dependencies\Comfort.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\dependencies\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\dependencies\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\dependencies\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>..\dependencies\UnityEngine.AudioModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule">
-      <HintPath>..\dependencies\UnityEngine.InputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\dependencies\UnityEngine.InputLegacyModule.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO">
-      <HintPath>..\dependencies\System.Runtime.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\..\BepInEx\plugins\$(TargetName).dll&quot;&#xD;&#xA;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug&quot; (&#xD;&#xA;   copy /Y &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(SolutionDir)..\..\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;) else (&#xD;&#xA;    del /Q &quot;$(SolutionDir)..\..\BepInEx\plugins\$(TargetName).pdb&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release&quot; (&#xD;&#xA;    powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;$(ProjectDir)PackageMods.ps1&quot; -ConfigurationName &quot;$(ConfigurationName)&quot; -TargetPath &quot;$(TargetPath)&quot; -TargetName &quot;$(TargetName)&quot; -SolutionDir $(SolutionDir)&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;" />
-  </Target>
+    <PropertyGroup>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <TargetFramework>net472</TargetFramework>
+        <RootNamespace>RuKira.ActuallyFoundInRaid</RootNamespace>
+        <AssemblyName>ActuallyFoundInRaid</AssemblyName>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+    <PropertyGroup>
+        <TarkovDir Condition=" '$(TarkovDir)' == '' ">F:\SPT - DEV\</TarkovDir>
+        <TarkovPluginsSPTDir>$(TarkovDir)BepInEx\plugins\spt\</TarkovPluginsSPTDir>
+        <TarkovManagedDir>$(TarkovDir)EscapeFromTarkov_Data\Managed\</TarkovManagedDir>
+        <TarkovBepInExCoreDir>$(TarkovDir)BepInEx\core\</TarkovBepInExCoreDir>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Net.Http" />
+        <Reference Include="System.Xml" />
+        <Reference Include="0Harmony">
+            <HintPath>$(TarkovBepInExCoreDir)0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="CommonExtensions">
+            <HintPath>$(TarkovManagedDir)CommonExtensions.dll</HintPath>
+        </Reference>
+        <Reference Include="spt-common">
+            <HintPath>$(TarkovPluginsSPTDir)spt-common.dll</HintPath>
+        </Reference>
+        <Reference Include="spt-custom">
+            <HintPath>$(TarkovPluginsSPTDir)spt-custom.dll</HintPath>
+        </Reference>
+        <Reference Include="spt-reflection">
+            <HintPath>$(TarkovPluginsSPTDir)spt-reflection.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(TarkovManagedDir)Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx">
+            <HintPath>$(TarkovBepInExCoreDir)BepInEx.dll</HintPath>
+        </Reference>
+        <Reference Include="Comfort">
+            <HintPath>$(TarkovManagedDir)Comfort.dll</HintPath>
+        </Reference>
+        <Reference Include="Comfort.Unity, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>$(TarkovManagedDir)Comfort.Unity.dll</HintPath>
+        </Reference>
+        <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>$(TarkovManagedDir)Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>$(TarkovManagedDir)Unity.TextMeshPro.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(TarkovManagedDir)UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(TarkovManagedDir)UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+            <HintPath>$(TarkovManagedDir)UnityEngine.ImageConversionModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>$(TarkovManagedDir)UnityEngine.IMGUIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>$(TarkovManagedDir)UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>$(TarkovManagedDir)UnityEngine.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+            <HintPath>$(TarkovManagedDir)UnityEngine.UIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule">
+            <HintPath>$(TarkovManagedDir)UnityEngine.UnityWebRequestModule.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <PropertyGroup>
+        <PostBuildEvent>
+        </PostBuildEvent>
+    </PropertyGroup>
+    <Target Name="CopyDll" AfterTargets="PostBuildEvent">
+        <ItemGroup>
+            <OutputDLL Include="$(ProjectDir)$(OutDir)$(TargetName).dll" />
+        </ItemGroup>
+        <!-- Copies the output to tarkov game folder -->
+        <Copy SourceFiles="@(OutputDLL)" DestinationFolder="$(TarkovDir)BepInEx\plugins\ActuallyFoundInRaid\%(RecursiveDir)" />
+        <!-- Delete previous build folder -->
+        <RemoveDir Directories="$(ProjectDir)BuildScripts\Build" />
+        <!-- Copy dll to build folder -->
+        <Copy SourceFiles="@(OutputDLL)" DestinationFolder="$(ProjectDir)BuildScripts\Build\BepInEx\plugins\ActuallyFoundInRaid\%(RecursiveDir)" />
+    </Target>
+    <Target Name="RunPackModScript" AfterTargets="CopyDll">
+        <ItemGroup>
+            <OutputDLL Include="$(ProjectDir)$(OutDir)$(TargetName).dll" />
+            <OutputDir Include="$(ProjectDir)" />
+        </ItemGroup>
+        <Exec Condition="'$(Configuration)' == 'Release'" Command="powershell -ExecutionPolicy Bypass -File &quot;$(OutputDir)BuildScripts\PackModRelease.ps1&quot;" />
+    </Target>
 </Project>
