@@ -35,7 +35,6 @@ namespace RuKira.ActuallyFoundInRaid.Patches
                     foreach (var slotType in Utils.SlotsToProcess)
                     {
                         Utils.ProcessSlot(botProfile.Inventory.Equipment.GetSlot(slotType));
-                        Logger.LogInfo($"CoopBot {botProfile.Info.Nickname} {slotType} was successfully created and patched.");
                     }
 
                     Logger.LogInfo($"CoopBot {botProfile.Info.Nickname} was successfully created and patched.");
