@@ -7,7 +7,7 @@
         <OutputType>Library</OutputType>
     </PropertyGroup>
     <PropertyGroup>
-        <TarkovDir Condition=" '$(TarkovDir)' == '' ">E:\SPT 4 Modding\</TarkovDir>
+        <TarkovDir Condition=" '$(TarkovDir)' == '' ">F:\SPT - DEV\</TarkovDir>
         <TarkovPluginsSPTDir>$(TarkovDir)BepInEx\plugins\spt\</TarkovPluginsSPTDir>
         <TarkovManagedDir>$(TarkovDir)EscapeFromTarkov_Data\Managed\</TarkovManagedDir>
         <TarkovBepInExCoreDir>$(TarkovDir)BepInEx\core\</TarkovBepInExCoreDir>
