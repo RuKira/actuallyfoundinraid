@@ -368,3 +368,5 @@ FodyWeavers.xsd
 obj/
 bin/
 packages/
+/BuildScripts/Build/BepInEx/plugins/ActuallyFoundInRaid
+/BuildScripts

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PrivateRyan.ActuallyFoundInRaid.Helpers
+namespace RuKira.ActuallyFoundInRaid.Helpers
 {
     internal class Settings
     {

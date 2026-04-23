@@ -1,14 +1,15 @@
 using BepInEx;
-using PrivateRyan.ActuallyFoundInRaid.Helpers;
-using PrivateRyan.ActuallyFoundInRaid.Patches;
+using RuKira.ActuallyFoundInRaid.Helpers;
+using RuKira.ActuallyFoundInRaid.Patches;
 
-namespace PrivateRyan.ActuallyFoundInRaid
+namespace RuKira.ActuallyFoundInRaid
 {
-    [BepInPlugin("privateryan.actuallyfir", "ActuallyFoundInRaid", Version)]
-    [BepInDependency("com.SPT.core", "3.11")]
+    [BepInPlugin("com.rukiragaming.actuallyfir", "ActuallyFoundInRaid", Version)]
+    [BepInDependency("com.SPT.core", "4.0.5")]
     public class ActuallyFIRPlugin : BaseUnityPlugin
     {
-        public const string Version = "1.0.2";
+        public const string Version = "1.0.4";
+
         private void Awake()
         {
             Settings.Init(Config);

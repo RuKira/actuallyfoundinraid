@@ -1,6 +1,6 @@
 ﻿using EFT.InventoryLogic;
 
-namespace PrivateRyan.ActuallyFoundInRaid.Helpers
+namespace RuKira.ActuallyFoundInRaid.Helpers
 {
     internal class Utils
     {
@@ -18,7 +18,7 @@ namespace PrivateRyan.ActuallyFoundInRaid.Helpers
             EquipmentSlot.SecondPrimaryWeapon,
             EquipmentSlot.Pockets
         };
-        
+
         public static void ProcessSlot(Slot slot)
         {
             var item = slot.ContainedItem;
