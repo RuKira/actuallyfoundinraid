@@ -32,9 +32,9 @@ namespace RuKira.ActuallyFoundInRaid.Patches
                     var botProfile = ___BotOwner_0.Profile;
                     botProfile.SetSpawnedInSession(true);
                     
-                    foreach (var slotType in Utils.SlotsToProcess)
+                    foreach (var slotType in Helpers.Utils.SlotsToProcess)
                     {
-                        Utils.ProcessSlot(botProfile.Inventory.Equipment.GetSlot(slotType));
+                        Helpers.Utils.ProcessSlot(botProfile.Inventory.Equipment.GetSlot(slotType));
                     }
 
                     Logger.LogInfo($"CoopBot {botProfile.Info.Nickname} was successfully created and patched.");
