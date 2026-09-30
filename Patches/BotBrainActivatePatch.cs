@@ -17,24 +17,23 @@ namespace RuKira.ActuallyFoundInRaid.Patches
         }
 
         [PatchPostfix]
-        public static void PatchPostfix(WildSpawnType __state, StandartBotBrain __instance, BotOwner ___BotOwner_0)
+        public static void PatchPostfix(StandartBotBrain __instance)
         {
-            __state = ___BotOwner_0.Profile.Info.Settings.Role; // Store original type in state param to allow access in PatchPostFix()
-            
             if (!Settings.ActuallyFIREnabled.Value)
                 return;
             
+            var owner = __instance._owner;
             try
             {
-                var isSptPmc = AIExtensions.IsPMC(___BotOwner_0);
+                var isSptPmc = AIExtensions.IsPMC(owner);
                 if (isSptPmc)
                 {
-                    var botProfile = ___BotOwner_0.Profile;
+                    var botProfile = owner.Profile;
                     botProfile.SetSpawnedInSession(true);
                     
-                    foreach (var slotType in Utils.SlotsToProcess)
+                    foreach (var slotType in Helpers.Utils.SlotsToProcess)
                     {
-                        Utils.ProcessSlot(botProfile.Inventory.Equipment.GetSlot(slotType));
+                        Helpers.Utils.ProcessSlot(botProfile.Inventory.Equipment.GetSlot(slotType));
                     }
 
                     Logger.LogInfo($"CoopBot {botProfile.Info.Nickname} was successfully created and patched.");
