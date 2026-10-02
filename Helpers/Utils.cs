@@ -12,6 +12,7 @@ namespace RuKira.ActuallyFoundInRaid.Helpers
             EquipmentSlot.Eyewear,
             EquipmentSlot.TacticalVest,
             EquipmentSlot.ArmorVest,
+            EquipmentSlot.Scabbard,
             EquipmentSlot.Backpack,
             EquipmentSlot.Holster,
             EquipmentSlot.FirstPrimaryWeapon,

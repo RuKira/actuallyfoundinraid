@@ -2,7 +2,6 @@
 using SPT.Reflection.Patching;
 using HarmonyLib;
 using System.Reflection;
-using EFT;
 using RuKira.ActuallyFoundInRaid.Helpers;
 using SPT.Custom.CustomAI;
 
@@ -36,16 +35,14 @@ namespace RuKira.ActuallyFoundInRaid.Patches
                         Helpers.Utils.ProcessSlot(botProfile.Inventory.Equipment.GetSlot(slotType));
                     }
 
-                    Logger.LogInfo($"CoopBot {botProfile.Info.Nickname} was successfully created and patched.");
+                    Logger.LogInfo($"ActuallyFoundInRaid {botProfile.Info.Nickname} was successfully created and patched.");
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error running CustomAiPatch PatchPostfix(): {ex.Message}");
+                Logger.LogError($"ActuallyFoundInRaid Error PatchPostfix(): {ex.Message}");
                 Logger.LogError(ex.StackTrace);
             }
-
-            return; // Do original 
         }
     }
 }
